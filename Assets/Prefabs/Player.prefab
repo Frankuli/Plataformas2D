@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7849810739566838203}
   - component: {fileID: 7849810739566838205}
   - component: {fileID: -8472026814405492022}
-  - component: {fileID: 1647933738}
+  - component: {fileID: 4695760167907472243}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7849810739566838198}
---- !u!114 &1647933738
+--- !u!114 &4695760167907472243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,10 +198,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 7849810739566838199}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97f3d3707934e0749b17e837a5cf58c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 872ef7af20803d24e899045c41adfedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  playerSelected: 0
+  animator: {fileID: 7849810739566838198}
+  spriteRenderer: {fileID: 7849810739566838201}
+  playerController:
+  - {fileID: 9100000, guid: 3547244b334fc144c9dda3a64161b931, type: 2}
+  - {fileID: 9100000, guid: a5c8f36b66c92a54aaa3a2421b30e029, type: 2}
+  - {fileID: 9100000, guid: 1a18531d39734294595e0b58996009da, type: 2}
+  - {fileID: 9100000, guid: 7491ab9e2aef08440b2d792fc028a9b1, type: 2}
+  playerRenderer:
+  - {fileID: -6367560908665664636, guid: 3750f45c844123341b9a777a96cb1eca, type: 3}
+  - {fileID: -6367560908665664636, guid: cd947491a13509945aa1b644f9db3ef2, type: 3}
+  - {fileID: -6367560908665664636, guid: d348dff3819df794186a80cb95777629, type: 3}
+  - {fileID: -6367560908665664636, guid: 40de9a8703e2e5a47882b0b86451c741, type: 3}
 --- !u!1 &7849810740880325203
 GameObject:
   m_ObjectHideFlags: 0
