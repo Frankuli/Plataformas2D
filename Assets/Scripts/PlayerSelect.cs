@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerSelect : MonoBehaviour
 {
+    public bool enableSelectPlayer;
+
     public enum Player {Mask, Frog, Pink, Virtual};//seleccion
     public Player playerSelected;
     
@@ -17,24 +19,61 @@ public class PlayerSelect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        switch (playerSelected)
+        if (!enableSelectPlayer)
         {
-            case Player.Mask:
+            ChangePlayerInMenu();
+        }
+        else
+        {
+            switch (playerSelected)
+            {
+                case Player.Mask:
+                    animator.runtimeAnimatorController = playerController[0];
+                    spriteRenderer.sprite = playerRenderer[0];
+                    break;
+
+                case Player.Frog:
+                    animator.runtimeAnimatorController = playerController[1];
+                    spriteRenderer.sprite = playerRenderer[1];
+                    break;
+
+                case Player.Pink:
+                    animator.runtimeAnimatorController = playerController[2];
+                    spriteRenderer.sprite = playerRenderer[2];
+                    break;
+
+                case Player.Virtual:
+                    animator.runtimeAnimatorController = playerController[3];
+                    spriteRenderer.sprite = playerRenderer[3];
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+
+    }
+    public void ChangePlayerInMenu()
+    {
+        switch (PlayerPrefs.GetString("PlayerSelected"))
+        {
+            case "Mask":
                 animator.runtimeAnimatorController = playerController[0];
                 spriteRenderer.sprite = playerRenderer[0];
                 break;
 
-            case Player.Frog:
+            case "Frog":
                 animator.runtimeAnimatorController = playerController[1];
                 spriteRenderer.sprite = playerRenderer[1];
                 break;
 
-            case Player.Pink:
+            case "Pink":
                 animator.runtimeAnimatorController = playerController[2];
                 spriteRenderer.sprite = playerRenderer[2];
                 break;
 
-            case Player.Virtual:
+            case "Virtual":
                 animator.runtimeAnimatorController = playerController[3];
                 spriteRenderer.sprite = playerRenderer[3];
                 break;
@@ -42,12 +81,5 @@ public class PlayerSelect : MonoBehaviour
             default:
                 break;
         }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
