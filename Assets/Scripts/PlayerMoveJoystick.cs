@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMoveJoystick : MonoBehaviour
 {
     private float horizontalMove = 0;
-    private float verticalMove = 0;
     public Joystick joystick;
 
     public float runSpeedHorizontal = 2;

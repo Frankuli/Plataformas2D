@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkinsChange : MonoBehaviour
 {
     public GameObject panelSkins;
-    private bool inDoor = false;
+    private bool inDoor;
     public GameObject player;
 
     private void OnTriggerEnter2D(Collider2D collision)
