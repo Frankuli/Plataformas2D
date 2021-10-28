@@ -51,10 +51,16 @@ public class AIBasic : MonoBehaviour
         if (transform.position.x > actualPos.x)
         {
             spriteRenderer.flipX = true;
+            animator.SetBool("Idle", false);
         }
         else if(transform.position.x < actualPos.x)
         {
             spriteRenderer.flipX = false;
+            animator.SetBool("Idle", false);
+        }
+        else if (transform.position.x == actualPos.x)
+        {
+            animator.SetBool("Idle", true);
         }
     }
 }

@@ -6,9 +6,9 @@ public class DamageObject : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("Player"))//si colisiona
         {
-            collision.transform.GetComponent<PlayerRespawn>().PlayerDamage();
+            collision.transform.GetComponent<PlayerRespawn>().PlayerDamage();//reespaunea
         }
     }
 }
