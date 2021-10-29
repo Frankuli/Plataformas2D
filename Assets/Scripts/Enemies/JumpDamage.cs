@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class JumpDamage : MonoBehaviour
 {
-    public Collider2D collider2D;
+    //public Collider2D collider2D;
     public Animator animator;
     public SpriteRenderer spriteRenderer;
     public GameObject destroyParticule;
     public float jumpForce = 2.5f;
     public int life = 2;
+    public AudioSource clip;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -25,6 +27,7 @@ public class JumpDamage : MonoBehaviour
     {
         life--;
         animator.Play("Hit");
+        clip.Play();
     }
 
     public void CheckLife()
