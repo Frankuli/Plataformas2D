@@ -25,6 +25,15 @@ public class PlayerController : MonoBehaviour
     public float dashForce = 30;
     public GameObject dashParticle;
 
+    private bool isTouchingFront = false;
+    private bool wallSliding; //deslizandose
+
+    public float wallSlidingSpeed = 0.75f;
+
+    private bool isTouchingRight;
+    private bool isTouchingLeft;
+
+
 
     void Start()
     {
@@ -35,6 +44,9 @@ public class PlayerController : MonoBehaviour
     {
         JumpPlayer();
         dashCooldown -= Time.deltaTime;
+        WallSliding();
+
+
     }
 
     void FixedUpdate()//por el tema de las fisicas y el movimiento asi es mejor
@@ -45,11 +57,12 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) && !isTouchingRight)
         {
             playerRb.velocity = new Vector2(speed, playerRb.velocity.y);
             spriteRenderer.flipX = false;//voltea el personaje al caminar
             animator.SetBool("Run", true);
+
             if (CheckGround.isGrounded)
             {
                 dustRight.SetActive(false);
@@ -57,7 +70,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) && !isTouchingLeft)
         {
             playerRb.velocity = new Vector2(-speed, playerRb.velocity.y);
             spriteRenderer.flipX = true;
@@ -90,7 +103,7 @@ public class PlayerController : MonoBehaviour
 
     void JumpPlayer()
     {
-        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow)) && CheckGround.isGrounded)
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow)) && CheckGround.isGrounded && !wallSliding)
         {    
             canDoubleJump = true;
             playerRb.velocity = new Vector2(playerRb.velocity.x, jump);
@@ -135,6 +148,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void WallSliding()
+    {
+        if (isTouchingFront && !CheckGround.isGrounded)
+        {
+            wallSliding = true;
+        }
+        else
+        {
+            wallSliding = false;
+        }
+
+        if (wallSliding)
+        {
+            animator.Play("WallJump");
+            playerRb.velocity = new Vector2(playerRb.velocity.y, Mathf.Clamp(playerRb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+    }
+
     void Dash()
     {
         if (Input.GetKey(KeyCode.V) && dashCooldown <= 0)
@@ -156,5 +187,27 @@ public class PlayerController : MonoBehaviour
             Destroy(dashObject,1);
         }
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("WallRight"))
+        {
+            isTouchingFront = true;
+            isTouchingRight = true;
+        }
+        if (collision.gameObject.CompareTag("WallLeft"))
+        {
+            isTouchingFront = true;
+            isTouchingLeft = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        isTouchingFront = false;
+        isTouchingLeft = false;
+        isTouchingRight = false;
+    }
+
 }
 
