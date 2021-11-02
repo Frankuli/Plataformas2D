@@ -31,7 +31,7 @@ public class PlayerMoveJoystick : MonoBehaviour
 
     void FixedUpdate()//por el tema de las fisicas y el movimiento asi es mejor
     {
-        MovePlayer();
+        
         Move();
 
     }
@@ -100,6 +100,7 @@ public class PlayerMoveJoystick : MonoBehaviour
        
         horizontalMove = joystick.Horizontal * runSpeedHorizontal;
         transform.position += new Vector3(horizontalMove, 0, 0) * Time.deltaTime * speed ;
+        MovePlayer();
     }
 
 }

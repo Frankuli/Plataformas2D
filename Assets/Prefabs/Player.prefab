@@ -726,8 +726,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystick: {fileID: 0}
   runSpeedHorizontal: 2
-  speed: 1.25
-  jump: 3
+  speed: 2
+  jump: 4
   doubleJump: 2.5
   canDoubleJump: 0
   spriteRenderer: {fileID: 7849810739566838201}
