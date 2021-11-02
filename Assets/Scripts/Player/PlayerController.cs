@@ -13,9 +13,13 @@ public class PlayerController : MonoBehaviour
     public bool betterJump;
     public float fallMultiplier = 1;
     public float lowJumpultiplayer = 0.5f;
+    
     //las asigno a mano
     public SpriteRenderer spriteRenderer;
     public Animator animator;
+
+    public GameObject dustLeft;
+    public GameObject dustRight;
 
     void Start()
     {
@@ -40,18 +44,39 @@ public class PlayerController : MonoBehaviour
             playerRb.velocity = new Vector2(speed, playerRb.velocity.y);
             spriteRenderer.flipX = false;//voltea el personaje al caminar
             animator.SetBool("Run", true);
-        }
+            if (CheckGround.isGrounded)
+            {
+                dustRight.SetActive(false);
+                dustLeft.SetActive(true);
+            }
 
+        }
         else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             playerRb.velocity = new Vector2(-speed, playerRb.velocity.y);
             spriteRenderer.flipX = true;
             animator.SetBool("Run", true);
+            if (CheckGround.isGrounded)
+            {
+                dustRight.SetActive(true);
+                dustLeft.SetActive(false);
+            }
+
         }
         else
         {
             playerRb.velocity = new Vector2(0, playerRb.velocity.y);
             animator.SetBool("Run", false);
+            if (CheckGround.isGrounded)
+            {
+                dustRight.SetActive(false);
+                dustLeft.SetActive(false);
+            }
+            else
+            {
+                dustRight.SetActive(false);
+                dustLeft.SetActive(false);
+            }
         }
     }
 
@@ -62,7 +87,9 @@ public class PlayerController : MonoBehaviour
             canDoubleJump = true;
             playerRb.velocity = new Vector2(playerRb.velocity.x, jump);
 
-        }else if (((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))) && canDoubleJump)
+
+        }
+        else if (((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))) && canDoubleJump)
         {
             animator.SetBool("DoubleJump", true);
             playerRb.velocity = new Vector2(playerRb.velocity.x, doubleJump);
@@ -74,7 +101,8 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Jump", false);
             animator.SetBool("DoubleJump", false);
             animator.SetBool("Falling", false);
-        }else
+        }
+        else
         {
             animator.SetBool("Jump", true);
             animator.SetBool("Run", false);
@@ -83,7 +111,8 @@ public class PlayerController : MonoBehaviour
         if (playerRb.velocity.y < 0)
         {
             animator.SetBool("Falling", true);
-        }else if (playerRb.velocity.y > 0)
+        }
+        else if (playerRb.velocity.y > 0)
         {
             animator.SetBool("Falling", false);
         }
