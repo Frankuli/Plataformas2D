@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -13,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public bool betterJump;
     public float fallMultiplier = 1;
     public float lowJumpultiplayer = 0.5f;
-    
+
     //las asigno a mano
     public SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -52,7 +50,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()//por el tema de las fisicas y el movimiento asi es mejor
     {
         MovePlayer();
-        
+
     }
 
     void MovePlayer()
@@ -104,7 +102,7 @@ public class PlayerController : MonoBehaviour
     void JumpPlayer()
     {
         if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow)) && CheckGround.isGrounded && !wallSliding)
-        {    
+        {
             canDoubleJump = true;
             playerRb.velocity = new Vector2(playerRb.velocity.x, jump);
 
@@ -172,7 +170,7 @@ public class PlayerController : MonoBehaviour
         {
             GameObject dashObject;
 
-            dashObject = Instantiate(dashParticle,transform.position, transform.rotation);
+            dashObject = Instantiate(dashParticle, transform.position, transform.rotation);
 
             if (spriteRenderer.flipX)
             {
@@ -184,7 +182,7 @@ public class PlayerController : MonoBehaviour
             }
 
             dashCooldown = 2;
-            Destroy(dashObject,1);
+            Destroy(dashObject, 1);
         }
     }
 
@@ -208,6 +206,8 @@ public class PlayerController : MonoBehaviour
         isTouchingLeft = false;
         isTouchingRight = false;
     }
+
+
 
 }
 

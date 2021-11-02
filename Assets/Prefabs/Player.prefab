@@ -682,6 +682,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7849810739566838198}
+  heart:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &4695760167907472243
 MonoBehaviour:
   m_ObjectHideFlags: 0
