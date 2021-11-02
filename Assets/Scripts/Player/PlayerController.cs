@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
     public GameObject dustLeft;
     public GameObject dustRight;
 
+    public float dashCooldown;
+    public float dashForce = 30;
+    public GameObject dashParticle;
+
+
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
@@ -29,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         JumpPlayer();
+        dashCooldown -= Time.deltaTime;
     }
 
     void FixedUpdate()//por el tema de las fisicas y el movimiento asi es mejor
@@ -78,6 +84,8 @@ public class PlayerController : MonoBehaviour
                 dustLeft.SetActive(false);
             }
         }
+
+        Dash();
     }
 
     void JumpPlayer()
@@ -126,4 +134,27 @@ public class PlayerController : MonoBehaviour
                 playerRb.velocity += Vector2.up * Physics2D.gravity * lowJumpultiplayer * Time.deltaTime;//baja mas lento
         }
     }
+
+    void Dash()
+    {
+        if (Input.GetKey(KeyCode.V) && dashCooldown <= 0)
+        {
+            GameObject dashObject;
+
+            dashObject = Instantiate(dashParticle,transform.position, transform.rotation);
+
+            if (spriteRenderer.flipX)
+            {
+                playerRb.AddForce(Vector2.left * dashForce, ForceMode2D.Impulse);
+            }
+            else
+            {
+                playerRb.AddForce(Vector2.right * dashForce, ForceMode2D.Impulse);
+            }
+
+            dashCooldown = 2;
+            Destroy(dashObject,1);
+        }
+    }
 }
+

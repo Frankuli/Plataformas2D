@@ -48,19 +48,20 @@ public class AIBasic : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        if (transform.position.x > actualPos.x)
         {
-            spriteRenderer.flipX = true;
-            animator.SetBool("Idle", false);
-        }
-        else if(transform.position.x < actualPos.x)
-        {
-            spriteRenderer.flipX = false;
-            animator.SetBool("Idle", false);
-        }
-        else if (transform.position.x == actualPos.x)
-        {
-            animator.SetBool("Idle", true);
+            if (transform.position.x > actualPos.x)
+                spriteRenderer.flipX = true;
+
+            else if (transform.position.x < actualPos.x)
+                spriteRenderer.flipX = false;
+
+            if (animator.name == "Idle")
+            {
+                if (transform.position.x == actualPos.x)
+                    animator.SetBool("Idle", true);
+                else
+                    animator.SetBool("Idle", false);
+            }
         }
     }
 }
