@@ -11,12 +11,18 @@ public class SpawnObject : MonoBehaviour
     public Transform yUp;
     public Transform yDown;
 
-    public float timeSpawn = 1;
-    public float repeatSpawnRate = 3;
+    public float timeSpawnEnemies = 1;
+    public float repeatSpawnRateEnemies = 3;
+
+    public GameObject[] fruits;
+    public float timeSpawnFruits = 0.5f;
+    public float repeatSpawnRateFruits = 1.5f;
+
 
     void Start()
     {
-        InvokeRepeating("SpawnEnemies", timeSpawn, repeatSpawnRate);
+        InvokeRepeating("SpawnEnemies", timeSpawnEnemies, repeatSpawnRateEnemies);
+        InvokeRepeating("SpawnFruits", timeSpawnFruits, repeatSpawnRateFruits);
     }
 
     public void SpawnEnemies()
@@ -28,7 +34,19 @@ public class SpawnObject : MonoBehaviour
 
         spawnPosition = new Vector3(xRandom, yRange, 0);
 
-        GameObject enemie = Instantiate(enemies[xObject], spawnPosition, gameObject.transform.rotation);
+        GameObject enemy = Instantiate(enemies[xObject], spawnPosition, gameObject.transform.rotation);
+    }  
+    
+    public void SpawnFruits()
+    {
+        Vector3 spawnPosition = new Vector3(0, 0, 0);
+        var xRandom = Random.Range(xLeft.position.x, xRight.position.x);
+        var yRange = Random.Range(yDown.position.y, yUp.position.y);
+        var xObject = Random.Range(0, fruits.Length);
+
+        spawnPosition = new Vector3(xRandom, yRange, 0);
+
+        GameObject fruit = Instantiate(fruits[xObject], spawnPosition, gameObject.transform.rotation);
     }
 
 
