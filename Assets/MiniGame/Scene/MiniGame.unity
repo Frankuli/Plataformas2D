@@ -8679,8 +8679,6 @@ MonoBehaviour:
   xRight: {fileID: 1334981767}
   yUp: {fileID: 181781665}
   yDown: {fileID: 50302539}
-  timeSpawnEnemies: 1
-  repeatSpawnRateEnemies: 3
   fruits:
   - {fileID: 4559091003389405298, guid: 5596bbc3717e89748a4cb5b35d3d4e94, type: 3}
   - {fileID: 393065015144833310, guid: e4b1525e44dad11448851e3a071a5fd7, type: 3}
@@ -8692,6 +8690,9 @@ MonoBehaviour:
   - {fileID: 4058354913002856065, guid: 6b1215a88e31a1e4081b6349d639f425, type: 3}
   timeSpawnFruits: 0.5
   repeatSpawnRateFruits: 1.5
+  timeSpawnEnemies: 1
+  repeatSpawnRateEnemies: 3
+  difficultyTime: 0
 --- !u!4 &835609229
 Transform:
   m_ObjectHideFlags: 0
@@ -11080,7 +11081,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 99.2, y: -15}
+  m_AnchoredPosition: {x: 99.20001, y: -15}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1548420520
